@@ -15,5 +15,9 @@
             "src": "/(.*)",
             "dest": "training_management/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "PYTHONPATH": ".",
+        "DJANGO_SETTINGS_MODULE": "training_management.settings"
+    }
 } 
