@@ -25,12 +25,12 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'widget_tweaks',
     'training.apps.TrainingConfig',
-    'whitenoise.runserver_nostatic',  # Add whitenoise
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add whitenoise middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,7 +90,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -110,4 +110,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Login URLs
 LOGIN_REDIRECT_URL = 'home'
-LOGIN_URL = 'login' 
+LOGIN_URL = 'login'
+
+# Vercel specific settings
+if os.environ.get('VERCEL'):
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    MIDDLEWARE = ['django.middleware.security.SecurityMiddleware'] + MIDDLEWARE 
