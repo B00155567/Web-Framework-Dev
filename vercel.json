@@ -3,7 +3,15 @@
     "builds": [
         {
             "src": "training_management/wsgi.py",
-            "use": "@vercel/python"
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
+        },
+        {
+            "src": "staticfiles/",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
@@ -19,5 +27,9 @@
             "src": "/(.*)",
             "dest": "training_management/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "PYTHONPATH": ".",
+        "DJANGO_SETTINGS_MODULE": "training_management.settings"
+    }
 } 
