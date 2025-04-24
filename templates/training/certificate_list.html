@@ -1,0 +1,46 @@
+{% extends 'training/base.html' %}
+
+{% block title %}My Certificates - Training Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1>My Certificates</h1>
+
+        {% if certificates %}
+            <div class="row">
+                {% for certificate in certificates %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ certificate.enrollment.module.title }}</h5>
+                                <p class="card-text">
+                                    Certificate Number: {{ certificate.certificate_number }}
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        Issued on {{ certificate.issued_at|date:"M d, Y" }}
+                                    </small>
+                                </p>
+                                {% if certificate.pdf_file %}
+                                    <a href="{{ certificate.pdf_file.url }}" class="btn btn-primary" download>
+                                        Download Certificate
+                                    </a>
+                                {% else %}
+                                    <div class="alert alert-warning">
+                                        Certificate PDF not available.
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                You don't have any certificates yet. Complete a module to earn a certificate.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

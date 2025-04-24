@@ -1,0 +1,47 @@
+{% extends 'training/base.html' %}
+
+{% block title %}Home - Training Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1 class="card-title">Welcome to Training Management System</h1>
+                <p class="card-text">
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            You are logged in as an instructor. You can create and manage training modules.
+                        {% else %}
+                            You are logged in as a student. You can enroll in modules and track your progress.
+                        {% endif %}
+                    {% else %}
+                        Please log in to access the training modules and resources.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if user.is_authenticated and modules %}
+            <div class="card">
+                <div class="card-header">
+                    <h2>Your Modules</h2>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% for module in modules %}
+                            <a href="{% url 'module_detail' pk=module.pk %}" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ module.title }}</h5>
+                                    <small>{{ module.start_date|date:"M d, Y" }} - {{ module.end_date|date:"M d, Y" }}</small>
+                                </div>
+                                <p class="mb-1">{{ module.description|truncatewords:20 }}</p>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

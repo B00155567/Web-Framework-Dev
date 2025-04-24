@@ -1,0 +1,35 @@
+[
+    {
+        "model": "training.forumpost",
+        "pk": 1,
+        "fields": {
+            "module": 1,
+            "author": 2,
+            "title": "Question about HTML",
+            "content": "I'm having trouble with HTML forms. Can anyone help?",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "training.forumpost",
+        "pk": 2,
+        "fields": {
+            "module": 1,
+            "author": 3,
+            "title": "CSS Grid Layout",
+            "content": "Here's a great resource for learning CSS Grid: https://css-tricks.com/snippets/css/complete-guide-grid/",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "training.forumpost",
+        "pk": 3,
+        "fields": {
+            "module": 2,
+            "author": 2,
+            "title": "Django ORM Question",
+            "content": "How do I perform complex queries with the Django ORM?",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    }
+] 

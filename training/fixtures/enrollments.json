@@ -1,0 +1,22 @@
+[
+    {
+        "model": "training.enrollment",
+        "pk": 1,
+        "fields": {
+            "student": 2,
+            "module": 1,
+            "enrolled_at": "2024-01-01T00:00:00Z",
+            "status": "active"
+        }
+    },
+    {
+        "model": "training.enrollment",
+        "pk": 2,
+        "fields": {
+            "student": 2,
+            "module": 2,
+            "enrolled_at": "2024-01-01T00:00:00Z",
+            "status": "active"
+        }
+    }
+] 

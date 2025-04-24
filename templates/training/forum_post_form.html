@@ -1,0 +1,29 @@
+{% extends 'training/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if is_edit %}Edit{% else %}Create{% endif %} Forum Post - {{ module.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2>{% if is_edit %}Edit{% else %}Create{% endif %} Forum Post for {{ module.title }}</h2>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary">
+                            {% if is_edit %}Save Changes{% else %}Post{% endif %}
+                        </button>
+                        <a href="{% if is_edit %}{% url 'forum_post_detail' module_id=module.id post_id=form.instance.id %}{% else %}{% url 'forum_list' module_id=module.id %}{% endif %}" 
+                           class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

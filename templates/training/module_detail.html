@@ -1,0 +1,123 @@
+{% extends 'training/base.html' %}
+
+{% block title %}{{ module.title }} - Training Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h1 class="card-title">{{ module.title }}</h1>
+                <h6 class="card-subtitle mb-3 text-muted">
+                    Instructor: {{ module.instructor.username }}
+                </h6>
+                <p class="card-text">{{ module.description }}</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        Duration: {{ module.start_date|date:"M d, Y" }} - {{ module.end_date|date:"M d, Y" }}
+                    </small>
+                </div>
+                {% if not user.is_staff %}
+                    {% if is_enrolled %}
+                        <a href="{% url 'unenroll' module_id=module.pk %}" class="btn btn-danger">Unenroll</a>
+                    {% else %}
+                        <a href="{% url 'enroll' module_id=module.pk %}" class="btn btn-primary">Enroll</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Resources</h2>
+            </div>
+            <div class="card-body">
+                {% if user.is_staff or is_enrolled %}
+                    {% if user.is_staff or module.instructor == user %}
+                        <a href="{% url 'resource_upload' module_id=module.pk %}" class="btn btn-primary mb-3">Upload Resource</a>
+                    {% endif %}
+                    <div class="list-group">
+                        {% for resource in module.resources.all %}
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ resource.title }}</h5>
+                                    <small>{{ resource.uploaded_at|date:"M d, Y" }}</small>
+                                </div>
+                                <p class="mb-1">{{ resource.description }}</p>
+                                <a href="{{ resource.file.url }}" class="btn btn-sm btn-outline-primary" download>Download</a>
+                            </div>
+                        {% empty %}
+                            <div class="alert alert-info">
+                                No resources available for this module.
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        Please enroll in this module to access its resources.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Forum</h2>
+            </div>
+            <div class="card-body">
+                {% if user.is_staff or is_enrolled %}
+                    <a href="{% url 'forum_post_create' module_id=module.pk %}" class="btn btn-primary mb-3">Create Post</a>
+                    <div class="list-group">
+                        {% for post in module.forum_posts.all %}
+                            <a href="{% url 'forum_post_detail' module_id=module.id post_id=post.pk %}" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ post.title }}</h5>
+                                    <small>{{ post.created_at|date:"M d, Y" }}</small>
+                                </div>
+                                <p class="mb-1">{{ post.content|truncatewords:20 }}</p>
+                                <small>By {{ post.author.username }}</small>
+                            </a>
+                        {% empty %}
+                            <div class="alert alert-info">
+                                No forum posts available for this module.
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        Please enroll in this module to participate in forum discussions.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h2>Module Information</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Status:</strong>
+                        {% if module.is_active %}
+                            <span class="badge bg-success">Active</span>
+                        {% else %}
+                            <span class="badge bg-danger">Inactive</span>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Created:</strong>
+                        {{ module.created_at|date:"M d, Y" }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Enrolled Students:</strong>
+                        {{ module.enrollments.count }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

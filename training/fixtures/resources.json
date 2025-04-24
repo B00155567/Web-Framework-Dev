@@ -1,0 +1,35 @@
+[
+    {
+        "model": "training.resource",
+        "pk": 1,
+        "fields": {
+            "module": 1,
+            "title": "HTML Basics",
+            "description": "Introduction to HTML",
+            "file": "resources/html_basics.pdf",
+            "uploaded_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "training.resource",
+        "pk": 2,
+        "fields": {
+            "module": 1,
+            "title": "CSS Fundamentals",
+            "description": "Introduction to CSS",
+            "file": "resources/css_fundamentals.pdf",
+            "uploaded_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "training.resource",
+        "pk": 3,
+        "fields": {
+            "module": 2,
+            "title": "Django Models",
+            "description": "Advanced Django Models",
+            "file": "resources/django_models.pdf",
+            "uploaded_at": "2024-01-01T00:00:00Z"
+        }
+    }
+] 

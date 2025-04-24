@@ -1,0 +1,32 @@
+[
+    {
+        "model": "training.forumcomment",
+        "pk": 1,
+        "fields": {
+            "post": 1,
+            "author": 3,
+            "content": "What specific issue are you having with HTML forms?",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "training.forumcomment",
+        "pk": 2,
+        "fields": {
+            "post": 1,
+            "author": 2,
+            "content": "I'm not sure how to handle form validation.",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "training.forumcomment",
+        "pk": 3,
+        "fields": {
+            "post": 3,
+            "author": 1,
+            "content": "You can use Q objects for complex queries. Check the Django documentation.",
+            "created_at": "2024-01-01T00:00:00Z"
+        }
+    }
+] 

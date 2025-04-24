@@ -1,0 +1,10 @@
+Django==5.0.2
+django-crispy-forms==2.1
+crispy-bootstrap5==2023.10
+Pillow==10.2.0
+reportlab==4.1.0
+django-cleanup==8.0.0
+python-dotenv==1.0.1
+django-widget-tweaks==1.5.0
+behave-django==1.4.0
+selenium==4.18.1 
